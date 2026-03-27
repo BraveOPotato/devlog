@@ -4,9 +4,9 @@
 //  The title & description are auto-parsed from the Markdown file.
 // ============================================================
 
-const BLOG_LINKS = [
+var BLOG_LINKS = [
   {
-    url: "https://raw.githubusercontent.com/sindresorhus/sindresorhus/main/readme.md",
+    url: "https://raw.githubusercontent.com/BraveOPotato/FlowBoard/refs/heads/main/README.md",
     date: "2024-03-15",
     tags: ["open-source", "javascript"],
   },
@@ -16,9 +16,4 @@ const BLOG_LINKS = [
   //   date: "2024-04-01",
   //   tags: ["react", "performance"],
   // },
-  {
-    url: "https://raw.githubusercontent.com/BraveOPotato/ModalEngine/refs/heads/main/README.md",
-    date: "2024-04-01",
-    tags: ["react", "performance"],
-  },
 ];
