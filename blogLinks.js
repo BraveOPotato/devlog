@@ -5,15 +5,15 @@
 // ============================================================
 
 var BLOG_LINKS = [
-  {
-    url: "https://raw.githubusercontent.com/BraveOPotato/FlowBoard/refs/heads/main/README.md",
-    date: "2024-03-15",
-    tags: ["open-source", "javascript"],
-  },
   // Add more posts below:
   // {
   //   url: "https://raw.githubusercontent.com/your-repo/your-post.md",
   //   date: "2024-04-01",
   //   tags: ["react", "performance"],
   // },
+  {
+    url: "https://raw.githubusercontent.com/BraveOPotato/devlog/refs/heads/main/posts/meshtalk.md",
+    date: "2026-03-28",
+    tags: ["Distributed Systems", "PWA", "WebRTC"],
+  },
 ];
