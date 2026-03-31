@@ -47,3 +47,43 @@ So what did I choose? Let's mix it up!
 ### Chosen architecture:
 
 I choose to do a mix of star + distributed clusters + gossip. Let me explain!
+
+Here's the spec for the architecture:
+- Each node can have up to 5 children.
+- Each node can have a parent.
+- Each node can have a random backup node.
+ 
+This way there's always a way for traffic to flow, and it'll be mostly optimized. This architecture
+does need supplemental code for failure and recovery handling.
+
+### Failure detection & recovery:
+Each node is given a list of all the nodes in the cluster.
+
+Each node is given the ID of the grandparent in case the parent suddenly disconnects.
+
+Heartbeat pings will happen every second, and after 3 second of no response from the upstream, the upstream is considered offline.
+
+Each parent of children will tell the immediate children which one will be the successor incase the parent suddenly disconnects.
+
+When the parent suddenly disconnects, the successor child will absorb its siblings as children of his own, and connect into the grandparent. 
+NOTE: If this child had any children of its own, it will also have told the children which will be the successor, and the successor will absorb the 
+siblings and connect to it.
+
+If both the parent and grandparent both disconnect at the same time, advanced recovery procedure will begin. 
+- When check the list of all the nodes in the cluster, and iteratively check each node.
+- If a node is alive, ask how many decendants it has connected to its mesh.
+    * If the current mesh has more, it'll provide a the mesh topology to the peer's root (so that the target root can connect to our mesh).
+    * If the target mesh has more, we'll be provided a topology of the target mesh, and the root of the current mesh will find the most
+    appropriate node to connect to.
+
+Periodically, Web Worker will check all the nodes in the cluster to see if there's split brain situation in the cluster, and either absorb them or have
+them absorb us according to the previously discussed recovery procedure.
+
+Due to this setup, a cycle might occur where messages keep passing around, so we need to keep track of the IDs we've already seen. Also, any child node that sends a message,
+have it be grayed out until a confirmation is received from a parent that it received the message. This way the user will be informed from the UI whether their message
+was actually received by the cluster or not.
+
+### Types of nodes:
+1. Root node: The root is the center of the entire structure. Only sends messages down. 
+2. Leaf node: The outer-most edges of the structure. Only send messages up.
+3. Peer node: Between the root and the leaf. Bi-directional message passing.
