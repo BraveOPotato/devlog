@@ -16,4 +16,9 @@ var BLOG_LINKS = [
     date: "2026-03-28",
     tags: ["Distributed Systems", "PWA", "WebRTC"],
   },
+  {
+    url: "https://raw.githubusercontent.com/BraveOPotato/devlog/refs/heads/main/posts/flowboard.md",
+    date: "2026-03-28",
+    tags: ["Offline-first", "IndexedDB", "Service Workers"],
+  },
 ];
