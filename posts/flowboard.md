@@ -1,4 +1,4 @@
-# Journey of making FlowBoard
+# Making the best Kanban tool!
 ## An offline-first, no-signup, PWA-enabled, local-persistence-enabled Kanban that lives in your browser.  
 
 Currently live at https://flowboard.cc.
@@ -23,7 +23,7 @@ Leveraging PWAs means that I don't have to bundle a Chromium runtime with the ap
 #### Service Workers
 Service Workers let you control what the web app caches. For an offline-first application, this means that the logic for presenting the application for the end-user and the interactivity are saved so that the user can quickly resume their work.
 
-#### Cloudflare
+#### Cloudflare (not sponsored I promise!)
 Cloudflare KV was an easy pick. Cloudflare had all the necessary tools I could've asked for to make this project at the cost of $0.
 
 - Serverless functions (Cloudflare Workers): Deploying it will be as easy as dragging and dropping the index.js file.

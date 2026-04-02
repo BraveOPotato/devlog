@@ -18,7 +18,7 @@ var BLOG_LINKS = [
   },
   {
     url: "https://raw.githubusercontent.com/BraveOPotato/devlog/refs/heads/main/posts/flowboard.md",
-    date: "2026-03-28",
+    date: "2026-04-02",
     tags: ["Offline-first", "IndexedDB", "Service Workers"],
   },
 ];
