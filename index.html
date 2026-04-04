@@ -15,8 +15,6 @@
   <!-- highlight.js for code blocks -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <!-- Blog Links Config -->
-  <script src="blogLinks.js"></script>
 
   <style>
     /* ── TOKENS ──────────────────────────────────────────── */
@@ -499,9 +497,9 @@
         Occasional musings on open source, tooling, and the developer experience.
       </p>
       <div class="hero-links">
-        <a class="hero-link" href="https://github.com/BraveOPotato" target="_blank" rel="noopener">GitHub ↗</a>
-        <a class="hero-link" href="mailto:abdullah@alkhafaji.dev">Email ↗</a>
-        <a class="hero-link" href="https://www.linkedin.com/in/alkhafaji-one/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="hero-link" href="https://github.com" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="hero-link" href="/cdn-cgi/l/email-protection#c2aaa7aeaead82a7baa3afb2aea7eca1adaf">Email ↗</a>
+        <a class="hero-link" href="https://twitter.com" target="_blank" rel="noopener">Twitter ↗</a>
       </div>
     </section>
 
@@ -543,6 +541,9 @@
   </footer>
 
 </div>
+
+<!-- Blog Links Config -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="blogLinks.js"></script>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
@@ -702,13 +703,18 @@
     });
   }
 
+  // ── Derive a stable slug from a post's URL ───────────────
+  function slugFor(post) {
+    return post.url.split("/").pop().replace(/\.md$/i, "");
+  }
+
   // ── Open a post ──────────────────────────────────────────
   async function openPost(index) {
     const post = posts[index];
     if (!post) return;
 
     showArticleLoading();
-    history.pushState({ postIndex: index }, "", `#post-${index}`);
+    history.pushState({ postIndex: index }, "", `#${slugFor(post)}`);
 
     // Use cached raw if available
     const md = post.raw || await fetchMarkdown(post.url).catch(() => "# Error\nCould not load post.");
@@ -720,8 +726,11 @@
     document.getElementById("art-byline").textContent =
       `Abdullah Al Khafaji  ·  ${fmtDate(post.date)}`;
 
+    // Strip the leading H1 — it's already shown as the article headline above
+    const mdBody = md.replace(/^#\s+.+(\r?\n|$)/, "").trimStart();
+
     const body = document.getElementById("art-body");
-    body.innerHTML = marked.parse(md);
+    body.innerHTML = marked.parse(mdBody);
 
     // Re-run highlight on code blocks that weren't caught
     body.querySelectorAll("pre code").forEach(el => hljs.highlightElement(el));
@@ -730,12 +739,24 @@
   }
 
   // ── Browser back/forward ─────────────────────────────────
-  window.addEventListener("popstate", (e) => {
-    if (e.state && typeof e.state.postIndex === "number") {
-      openPost(e.state.postIndex);
-    } else {
-      showHome();
+  // -- Derive stable slug from post URL
+  function slugFor(post) {
+    return post.url.split("/").pop().replace(/\.md$/i, "");
+  }
+
+  // -- Resolve hash slug to post index
+  function indexForSlug(slug) {
+    return posts.findIndex(p => slugFor(p) === slug);
+  }
+
+  // -- Browser back/forward
+  window.addEventListener("popstate", () => {
+    const slug = location.hash.slice(1);
+    if (slug) {
+      const i = indexForSlug(slug);
+      if (i !== -1) { openPost(i); return; }
     }
+    showHome();
   });
 
   // ── Nav home ─────────────────────────────────────────────
@@ -754,8 +775,17 @@
       .replace(/"/g, "&quot;");
   }
 
-  // ── Init ─────────────────────────────────────────────────
-  loadPosts();
+  // -- Init: load posts, then deep-link if hash present ----
+  async function init() {
+    await loadPosts();
+    const slug = location.hash.slice(1);
+    if (slug) {
+      const i = indexForSlug(slug);
+      if (i !== -1) openPost(i);
+    }
+  }
+
+  init();
 </script>
 </body>
 </html>
