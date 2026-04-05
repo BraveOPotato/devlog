@@ -90,13 +90,13 @@ was actually received by the cluster or not.
 2. Leaf node: The outer-most edges of the structure. Only send messages up.
 3. Peer node: Between the root and the leaf. Bi-directional message passing.
 
-### Voice / Video chat
+### Voice/video chat
 
-For the voice / video chat feature, a special caveat had to be introduced that rearranges the cluster when someone joins / leaves the voice / video chat. Why? Well, because if voice data flows through the entire cluster, there would be too much unnecessary "noise" in the cluster flowing through nodes which don't need to receive the data stream. So what is the voice / video chat ruleset?
+For the voice/video chat feature, a special caveat had to be introduced that rearranges the cluster when someone joins/leaves the voice/video chat. Why? Well, because if voice data flows through the entire cluster, there would be too much unnecessary "noise" in the cluster flowing through nodes which don't need to receive the data stream. In addition to that, latency would increase to nodes which want to receive the data stream. So what is the voice/video chat ruleset?
 - If a node labeled itself as a voice chat node for a specific channel, only other voice chat nodes for the same specific channel can attach as children.
 - If you're about to join a voice call, drop all your children, and see if there's anyone else who is in the voice call.
 - If there's no one else in that voice call, reattach the cluster (which means you'll be a leaf node ready to accept voice chat nodes only for the specific voice channel).
 - Use the same optimized joining logic for voice chat sub cluster (closer to the root voice chat node, the better with the max of 7 immediate children per node).
 - Send voice chat data to children, and upstream (only if the upstream is a voice chat node for that specific channel).
 
-This new ruleset makes voice chats very optimized since audio/video streams only flow through nodes that need it. The architecture is the important part, adding audio / video / screen share capabilities is as simple as tacking on a data stream.
+This new ruleset makes voice chats very optimized since audio/video streams only flow through nodes that need it. The architecture is the important part, adding audio/video/screen-share capabilities is as simple as tacking on a data stream.
