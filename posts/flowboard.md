@@ -47,4 +47,12 @@ Now that this very convenient application was made, end users must be flocking t
 
 I'm currently showing it off to users so that they're aware of the product and hopefully will use it. Reddit's moderation is my enemy currenlty, they take down every post I make about the application, even though I legitmately gain nothing from it. Remember, no sign-ups, in-browser, open-source. I just wanted to spread the spirit of open-source software to the fine people.
 
-I hate to end it on a not so great note, but we're currently at this stage. I highly encourage you all to give it a try!
+#### Update (April 8th, 2026):
+People seem to use this application daily. So far, it's been almost two weeks since the release and there has been a steady flow of people using flowboard.
+proof:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/BraveOPotato/devlog/refs/heads/main/posts/img/flowboard-04-07-26.png" alt="FlowBoard-statistics"/>
+</p>
+
+The cool part here is that becuase `Service Workers` cache almost every request, the load on the server is practically none (except when syncing boards).
