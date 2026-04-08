@@ -100,4 +100,7 @@ For the voice/video chat feature, a special caveat had to be introduced that rea
 - Use the same optimized joining logic for voice chat sub cluster (closer to the root voice chat node, the better with the max of 7 immediate children per node).
 - Send voice chat data to children, and upstream (only if the upstream is a voice chat node for that specific channel).
 
+**NOTE:** there are so many edge cases to the rules above, handling them will be a pain for anyone who tries to replicate this architecture which is why I might make a library that facilitates this cluster/sub-cluster setup.
+
 This new ruleset makes voice chats very optimized since audio/video streams only flow through nodes that need it. The architecture is the important part, adding audio/video/screen-share capabilities is as simple as tacking on a data stream.
+
