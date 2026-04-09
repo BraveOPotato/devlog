@@ -44,17 +44,27 @@ That's a easy problem to solve. We can store the last 10 messages IDs and if we'
 
 So what did I choose? Let's mix it up!
 
-### Chosen architecture:
+### Chosen architecture: Snowflake + backup!
 
-I choose to do a mix of star + distributed clusters + gossip. Let me explain!
+I'm calling this architecture **Snowflake** (even though it's basically a sophisticated tree). What is it? it's mix of star + distributed clusters. To make it extra redundant, I'll add a fallback/backup node. Let me explain!
 
 Here's the spec for the architecture:
-- Each node can have up to 5 children.
-- Each node can have a parent.
-- Each node can have a random backup node.
+- Each node can have up to n children (7 in my case).
+- Each node can have up to 1 primary parent.
+
+In addition to that, I'm adding the following for redundancy:
+- Each node can have up to m random backup nodes (1 in my case).
  
-This way there's always a way for traffic to flow, and it'll be mostly optimized. This architecture
-does need supplemental code for failure and recovery handling.
+This way there's always a way for traffic to flow, and it'll be mostly optimized. This architecture does need supplemental code for failure and recovery handling. So, let's dig into that!
+
+Here's the pros of this architecture:
+- **Fair & Scalable:** Each node will only be connected to the max of n nodes, therefore limiting CPU usage & distributing load semi-equally throughout the cluster. This alone will make it scale since no one node is doing all the heavy lifting.
+- **Reliable:** As opposed to gossip, this will reliably deliver messages to all nodes, in the cluster.
+- **Low Latency:** As opposed to binary trees, having up to 7 children will decrease the number of layers (or hops) needed to deliver messages therefore decreasing latency. For example, in my architecture, 100,000 nodes will only need 6 layers. Binary tree would need 16 layers.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/BraveOPotato/devlog/refs/heads/main/posts/img/p2p-snowflake-arch.png" alt="Snowflake-architecture"/>
+</p>
 
 ### Failure detection & recovery:
 
