@@ -26,6 +26,10 @@ This was my first choice, it centralized all of the power to the central peer. T
 
 Unfortunately because all messages flow through the central peer, for each message sent, the central peer would have to send n_peers messages. So, if there are 100 peers connected, the central peer would send 100 messages for each message. This put a hard cap on the applicaiton which I can't take lying down. Since the problem is inherit to the architecture, I decided to redo it.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/BraveOPotato/devlog/refs/heads/main/posts/img/p2p-star-arch.png" alt="Star-architecture"/>
+</p>
+
 #### **Tree**: A binary tree of peers with a root peer.
 
 The tree architecture makes it so that each peer only sends about 3 messages max per message; to the parent, and to the two siblings. So, less compute? Yay! Well... There's a downside. The structure is rigid, so failure and recovery might take precious seconds that can be noticable to the end user. For example, if it takes the system about 3 seconds to recognize failure, and 1 second to recover, that's 4 seconds total of message not sending. In a real-time chatting application, that's a death blow.
