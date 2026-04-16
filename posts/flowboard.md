@@ -18,7 +18,7 @@ I prioritized speed in this project, and no frontend framework is faster than ra
 A browser database. The API makes you want to gouge your eyes out, but it's better than using raw LocalStorage. 
 
 #### PWA
-Leveraging PWAs means that I don't have to bundle a Chromium runtime with the application, meaning that installing it is near instantaneous for the end user. This opens the door to mobile & desktop distribution.
+Leveraging PWAs means that I don't have to bundle a Chromium runtime with the application (since I'm using the user's browser as a runtime), meaning that installing it is near instantaneous for the end user. This opens the door to mobile & desktop distribution.
 
 #### Service Workers
 Service Workers let you control what the web app caches. For an offline-first application, this means that the logic for presenting the application for the end-user and the interactivity are saved so that the user can quickly resume their work.
@@ -56,3 +56,10 @@ proof:
 </p>
 
 The cool part here is that becuase `Service Workers` cache almost every request, the load on the server is practically none (except when syncing boards).
+
+#### Update (April 16th, 2026):
+I've reached a point where the total requests for the webpage are 20x less than the requests for the serverless function. **What does this mean?** My optimization is working flawlessly! The users who want to use the application have cached the entire application, offloading repetitive requests to the server, and focusing on more important syncing tasks. 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/BraveOPotato/devlog/refs/heads/main/posts/img/flowboard-04-16-26.png" alt="FlowBoard-statistics-04-16-26"/>
+</p>
