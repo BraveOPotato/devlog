@@ -23,6 +23,9 @@ Leveraging PWAs means that I don't have to bundle a Chromium runtime with the ap
 #### Service Workers
 Service Workers let you control what the web app caches. For an offline-first application, this means that the logic for presenting the application for the end-user and the interactivity are saved so that the user can quickly resume their work.
 
+### Conflict-free Replicated Data Type (CRDT):
+A special type of data that allows for real-time collaboration & easy merges. This data type is very facinating. The way I'm implementing this is instead of having the user upload the board state each time, they upload the operations they made on the board along with timestamps. Whenever the user reconnects to the server, the operations they made are uploaded to the server, and the operations they missed are sent to them. That way each client can reconstruct the board from the chain of operations made on the board. Kind-of like a block-chain.
+
 #### Cloudflare (not sponsored I promise!)
 Cloudflare KV was an easy pick. Cloudflare had all the necessary tools I could've asked for to make this project at the cost of $0.
 
