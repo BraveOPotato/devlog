@@ -12,19 +12,21 @@ Since I was learning about PWAs, Service Workers, and IndexedDB I figured that i
 ### Why specifically these technologies:
 
 #### Web Native Technologies
-I prioritized speed in this project, and no frontend framework is faster than raw JavaScript (not even Yew, but don't quote me on that).
+I prioritized speed in this project, and no frontend framework is faster than raw JavaScript (not even Yew, but don't quote me on that). In a similar vein, a framework will always ship more JavaScript, because you can't abstract JavaScript.
+
+NOTE: Depending on the framework, big bundle size may not be a big deal since it's a single page application (SPA) which means bundle size isn't as relevant as the runtime speed. Also, since the user will cache the application, subsequent visits are always going to be near instantaneous.
 
 #### IndexedDB
 A browser database. The API makes you want to gouge your eyes out, but it's better than using raw LocalStorage. 
 
-#### PWA
+#### Progressive Web App (PWA)
 Leveraging PWAs means that I don't have to bundle a Chromium runtime with the application (since I'm using the user's browser as a runtime), meaning that installing it is near instantaneous for the end user. This opens the door to mobile & desktop distribution.
 
 #### Service Workers
 Service Workers let you control what the web app caches. For an offline-first application, this means that the logic for presenting the application for the end-user and the interactivity are saved so that the user can quickly resume their work.
 
-### Conflict-free Replicated Data Type (CRDT):
-A special type of data that allows for real-time collaboration & easy merges. This data type is very facinating. The way I'm implementing this is instead of having the user upload the board state each time, they upload the operations they made on the board along with timestamps. Whenever the user reconnects to the server, the operations they made are uploaded to the server, and the operations they missed are sent to them. That way each client can reconstruct the board from the chain of operations made on the board. Kind-of like a block-chain.
+#### Conflict-free Replicated Data Type (CRDT)
+A special type of data that allows for real-time collaboration & easy merges. This data type is very fascinating. The way I'm implementing this is instead of having the user upload the board state each time, they upload the operations they made on the board along with timestamps. Whenever the user reconnects to the server, the operations they made are uploaded to the server, and the operations they missed are sent to them. That way each client can reconstruct the board from the chain of events/operations made on the board. Kind-of like a block-chain.
 
 #### Cloudflare (not sponsored I promise!)
 Cloudflare KV was an easy pick. Cloudflare had all the necessary tools I could've asked for to make this project at the cost of $0.
