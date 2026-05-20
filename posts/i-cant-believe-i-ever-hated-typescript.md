@@ -21,4 +21,42 @@ I wanted to gouge my eyes out. I was thinking "well, AI is doing the coding for 
 would be like. Reading it wasn't the problem, understanding it wasn't the problem, but maintaining it so was! 
 
 
+What's even worse is that my application has many nested JSONs, and I have no way to know how each is structured or looks like without backwards full-tracing or debuggers.
+
+
 "So this is why everyone called AI code slop, huh..." I realized.
+
+
+## Why didn't AI just...
+It was around this time when I was very interested in Rust. At first, I hated the Result<T, E>. "I just want the data, give it to me!" What a foolish thought. No wonder why I had so many 
+runtime bugs. I'm not sure what changed or when, but something clicked.
+
+
+"Result<T, E> is actually guiding me to recover from errors" it definitely clicked. I instantly became a fan of the Rust way of handling the errors that I wished JavaScript had something similar. 
+
+
+Ding, ding, ding, ding... and the answer is... TypeScript!
+
+
+I immediately starting forming so many opinions on the AI-generated code. "OOP wouldn've been perfect here", "state machine would've worked better here", "this runtime error would've been completely mitigated by TypeScript." Shoulda, coulda, wouldla and a bunch of regreta! 
+
+
+Oh god, I'm so ashamed of the code. This is my doing. I allowed the AI agent to do this.
+
+
+## Senior devs just know more programming languages
+
+A foolish belief I once had when I was a younger developer.
+
+
+It's not necessarily wrong, but it's not the entire picture. Senior devs have built/maintained monsterous proejcts and have full understanding of the challenges of maintaining a large codebases 
+and what it takes to mitigate those challenges. This is when I realized that even-though I have been programming for more than 5 years, I'm still not even close to a senior dev, not by a long shot.
+
+
+## What did we learn?
+- Dynamic-typing cannot get you far unless you use extensive docs like ESDoc, or opt into a static type system.
+- Developer experience matters way more than a slightly longer initial load time (with React), ESPECIALLY if it's an SPA.
+- I'm not gaining anything by using JavaScript over TypeScript; in fact, it's a net loss.
+- USE A FRAMEWORK!
+
+Since most of my applications are data-intensive SPAs, I'll be taking some time to re-write them with React & TypeScript. Not using a framework has driven me to as far as I can get. Unfortunately, since the application size has gotten very big, re-writing, even with AI, isn't as easy without maxxing the context window. This is my doing, I dug my grave with an excavator, and now I have to dig myself out of it with a stone.
