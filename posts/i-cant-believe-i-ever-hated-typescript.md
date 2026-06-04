@@ -1,4 +1,4 @@
-# I Can't Believe I Ever Hated Typescript & OOP!
+# I Can't Believe I Ever Hated React, Typescript & OOP!
 
 ## The Background
 I've always dealt with JavaScript as "it is what it is" and brushed runtime errors as "it's the status quo, deal with it." Granted, it's only recently that I 
@@ -43,6 +43,9 @@ I immediately starting forming so many opinions on the AI-generated code. "OOP w
 
 Oh god, I'm so ashamed of the code. This is my doing. I allowed the AI agent to do this.
 
+## So... why React?
+
+Believe it or not, I've tried to make web components to re-use code & logic throughout my application, but the mess of the shadow DOM really made it inconvenient. I wanted my web components to have default styles but be easily styled. I achieved it, but with pain... much much pain. I figured "it would've been easier if my logic and style was around the same place so that I'm not jumping around all the time" ding, ding, ding! React w/ Tailwind got you!
 
 ## Senior devs just know more programming languages
 
