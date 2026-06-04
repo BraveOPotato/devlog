@@ -21,4 +21,9 @@ var BLOG_LINKS = [
     date: "2026-04-02",
     tags: ["Offline-first", "IndexedDB", "Service Workers"],
   },
+  {
+    url: "https://raw.githubusercontent.com/BraveOPotato/devlog/refs/heads/main/posts/i-cant-believe-i-ever-hated-typescript.md",
+    date: "2026-05-20",
+    tags: ["Learned a Lesson", "TypeScript", "React", "SPA"],
+  },
 ];
